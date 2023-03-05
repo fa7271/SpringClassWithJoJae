@@ -25,6 +25,9 @@ public class SecurityConfig {
 //         출처(Origin)란 동일한 프로토콜, 호스트, 포트를 가진 URI를 의미합니다.
 //        다른 출처에서의 리소스에 대한 접근을 제한하는 보안 문제를 해결할 수 있습니다.
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Rest API 는 기본적으로 Session 이 없다. 상태를 유지 하지 않는다.
+//          서버에 세션 정보를 저장하지 않기 때문에, 서버 측에서 관리할 필요가 없어지며, 서버 부하가 줄어듭니다.
+//          클라이언트 측에서 인증 정보를 갖고 있기 때문에, 로그인 후 요청 시마다 서버에 인증 정보를 전달하므로, 보안성이 높아집니다.
+//          RESTful API에서는 이전 요청과 이후 요청 간의 연관성이 필요 없기 때문에, STATELESS 방식이 적합합니다.
                 .and()
                 .authorizeHttpRequests().antMatchers("/login").permitAll()// 모든 사람이 url을 요청할 수 있다.
                 .anyRequest()
